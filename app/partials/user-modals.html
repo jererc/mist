@@ -1,0 +1,89 @@
+<div ng-controller="UserModalCtrl">
+
+    <!-- Update user modal -->
+    <div ng-model="user" id="modal-user-update" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Update user</h3>
+        </div>
+        <form class="form-horizontal" name="updateUserForm">
+            <div class="modal-body">
+
+                <!-- Name -->
+                <div class="control-group">
+                    <label class="control-label" for="input-name">Name</label>
+                    <div class="controls">
+                        <input ng-model="user.name" type="text" id="input-name" required>
+                    </div>
+                </div>
+
+                <!-- Username -->
+                <div class="control-group">
+                    <label class="control-label" for="input-username">Username</label>
+                    <div class="controls">
+                        <input ng-model="user.username" type="text" id="input-username" required>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="control-group">
+                    <label class="control-label" for="input-password">Password</label>
+                    <div class="controls">
+                        <input ng-model="user.password" type="password" id="input-password" required>
+                    </div>
+                </div>
+
+                <!-- Port -->
+                <div class="control-group">
+                    <label class="control-label" for="input-port">Port</label>
+                    <div class="controls">
+                        <input ng-model="user.port" class="span1" type="number" min="22" max="65536" id="input-port">
+                    </div>
+                </div>
+
+                <!-- Paths -->
+                <div class="control-group">
+                    <label class="control-label" for="input-path-music">Music path</label>
+                    <div class="controls">
+                        <input ng-model="user.paths.music" type="text" id="input-path-music">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="input-path-movies">Movies path</label>
+                    <div class="controls">
+                        <input ng-model="user.paths.movies" type="text" id="input-path-movies">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="input-path-tv">TV shows path</label>
+                    <div class="controls">
+                        <input ng-model="user.paths.tv" type="text" id="input-path-tv">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button submit-modal="updateUser()" ng-disabled="updateUserForm.$invalid" class="btn btn-danger">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Remove user modal -->
+    <div ng-model="user" id="modal-user-remove" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Remove user</h3>
+        </div>
+        <form class="form-horizontal" name="removeUserForm">
+            <div class="modal-body">
+                <p>Are you sure you want to remove <strong>{{user.name}}</strong> ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button submit-modal="removeUser()" ng-disabled="removeUserForm.$invalid" class="btn btn-danger">Ok</button>
+            </div>
+        </form>
+    </div>
+
+</div>

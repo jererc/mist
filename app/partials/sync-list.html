@@ -1,0 +1,50 @@
+<ng-include src="'partials/sync-modals.html'"></ng-include>
+
+<div class="container">
+    <div class="accordion" id="syncs-accordion">
+        <div ng-repeat="sync in syncs" class="accordion-group">
+
+            <!-- Header -->
+            <div class="accordion-heading">
+                <span class="text-center label item-status" ng-class="statusInfo[sync.status].labelClass">{{sync.status}}</span>
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#syncs-accordion" href="#{{sync._id}}">{{sync.name}}</a>
+            </div>
+
+            <!-- Content -->
+            <div id="{{sync._id}}" class="accordion-body collapse">
+                <div class="accordion-inner">
+
+                    <ul class="unstyled">
+                        <li><strong>Processed:</strong> {{sync.processed | ifDate}}</li>
+                        <li><strong>Finished:</strong> {{sync.transfer.finished | ifDate}}</li>
+                        <li><strong>Reserved:</strong> {{sync.reserved | ifDate}}</li>
+
+                        <li><strong>Source:</strong>
+                            <ul>
+                                <li><strong>User:</strong> {{sync.src.user}}</li>
+                                <li><strong>Disk UUID:</strong> {{sync.src.uuid}}</li>
+                                <li><strong>Path:</strong> {{sync.src.path}}</li>
+                            </ul>
+                        </li>
+
+                        <li><strong>Destination:</strong>
+                            <ul>
+                                <li><strong>User:</strong> {{sync.dst.user}}</li>
+                                <li><strong>Disk UUID:</strong> {{sync.dst.uuid}}</li>
+                                <li><strong>Path:</strong> {{sync.dst.path}}</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div>
+                        <button open-sync-modal="#modal-sync-update" class="btn">Edit</button>
+                        <button ng-click="resetSync(sync._id)" ng-class="{disabled: !!!sync.reserved}" class="btn btn-warning">Reset</button>
+                        <button open-sync-modal="#modal-sync-remove" class="btn btn-danger">Remove</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

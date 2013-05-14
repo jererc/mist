@@ -1,0 +1,101 @@
+<div class="container">
+
+    <div ng-show="!!!apiStatus" class="alert alert-error">
+        Failed to connect to the API
+    </div>
+
+    <!-- API -->
+    <div class="well">
+        <h4>API</h4>
+
+        <form class="form-horizontal" name="updateApiUrlForm">
+            <div class="control-group">
+                <label class="control-label" for="input-api-endpoint">URL</label>
+                <div class="controls">
+                    <input ng-model="apiUrl" type="text" id="input-api-endpoint" required>
+                    <button ng-click="checkApi()" ng-disabled="updateApiUrlForm.$invalid" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div ng-show="!!apiStatus">
+        <form class="form-horizontal" name="updateSettingsForm">
+
+            <!-- Host -->
+            <div class="well">
+                <h4>Host</h4>
+
+                <!-- IP range -->
+                <div class="control-group">
+                    <label class="control-label" for="ip_range">IP range</label>
+                    <div class="controls">
+                        <input ng-model="settings.host.ip_range" class="span2" type="text" id="input-ip-range" required>
+                    </div>
+                </div>
+
+                <!-- Host update delta -->
+                <div class="control-group">
+                    <label class="control-label" for="host_update_delta">Host update delta</label>
+                    <div class="controls">
+                        <input ng-model="settings.host.host_update_delta" class="span1" type="number" min="1" max="99999" id="host_update_delta" required><span class="add-on"> minutes</span>
+                    </div>
+                </div>
+
+                <!-- Host timeout -->
+                <div class="control-group">
+                    <label class="control-label" for="host_timeout">Host timeout</label>
+                    <div class="controls">
+                        <input ng-model="settings.host.host_timeout" class="span1" type="number" min="10" max="99999" id="host_timeout" required><span class="add-on"> minutes</span>
+                    </div>
+                </div>
+
+                <!-- Failed user timeout -->
+                <div class="control-group">
+                    <label class="control-label" for="host_timeout">Failed user timeout</label>
+                    <div class="controls">
+                        <input ng-model="settings.host.failed_user_timeout" class="span1" type="number" min="10" max="99999" id="failed_user_timeout" required><span class="add-on"> minutes</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sync -->
+            <div class="well">
+                <h4>Sync</h4>
+
+                <!-- Automount -->
+                <div class="control-group">
+                    <label class="control-label" for="automount">Auto mount destination</label>
+                    <div class="controls">
+                        <input ng-model="settings.sync.automount" type="checkbox" id="automount">
+                    </div>
+                </div>
+
+                <!-- Sync timeout -->
+                <div class="control-group">
+                    <label class="control-label" for="sync_timeout">Sync timeout</label>
+                    <div class="controls">
+                        <input ng-model="settings.sync.sync_timeout" class="span1" type="number" min="10" max="99999" id="sync_timeout" required><span class="add-on"> minutes</span>
+                    </div>
+                </div>
+
+                <!-- Sync retry delta -->
+                <div class="control-group">
+                    <label class="control-label" for="sync_retry_delta">Sync retry delta</label>
+                    <div class="controls">
+                        <input ng-model="settings.sync.sync_retry_delta" class="span1" type="number" min="10" max="99999" id="sync_retry_delta" required><span class="add-on"> minutes</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="well">
+                <button class="btn btn-warning">Reset</button>
+                <button ng-click="updateSettings()" ng-disabled="updateSettingsForm.$invalid" class="btn btn-primary">Save</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>

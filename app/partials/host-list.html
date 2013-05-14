@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="accordion" id="hosts-accordion">
+        <div ng-repeat="host in hosts" class="accordion-group">
+
+            <!-- Header -->
+            <div class="accordion-heading">
+                <span class="text-center label item-status" ng-class="statusInfo[host.alive].labelClass">{{statusInfo[host.alive].name}}</span>
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#hosts-accordion" href="#{{host._id}}">{{host.host}}<span ng-show="!!host.logged_users.length"> ({{host.logged_users | ifList}})</span></a>
+            </div>
+
+            <!-- Content -->
+            <div id="{{host._id}}" class="accordion-body collapse">
+                <div class="accordion-inner">
+
+                    <ul class="unstyled">
+                        <li><strong>Seen:</strong> {{host.seen | ifDate}}</li>
+                        <li><strong>Updated:</strong> {{host.updated | ifDate}}</li>
+                        <li><strong>Hostname:</strong> {{host.hostname}}</li>
+
+                        <li><strong>Disks:</strong>
+                            <ul>
+                                <li ng-repeat="disk in host.disks">
+                                    {{disk.dev}}
+                                    <ul class="unstyled">
+                                        <li><strong>UUID:</strong> {{disk.uuid}}</li>
+                                        <li><strong>Mountpoint:</strong> {{disk.path}}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><strong>Interfaces:</strong>
+                            <ul>
+                                <li ng-repeat="iface in host.ifconfig">
+                                    {{iface.ifname}}
+                                    <ul class="unstyled">
+                                        <li><strong>HWAddr:</strong> {{iface.hwaddr}}</li>
+                                        <li><strong>IP:</strong> {{iface.ip}}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                    <div>
+                        <button ng-click="resetHost(host._id)" ng-class="{disabled: !!!host.logged_users.length}" class="btn btn-warning" type="button">Reset</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

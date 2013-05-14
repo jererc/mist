@@ -1,0 +1,31 @@
+.center-content:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.control-label:first-letter {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+.capitalize-first:first-letter {
+    text-transform: uppercase;
+}
+
+.accordion-heading a.accordion-toggle {
+    display: inline-block;
+}
+
+.item-status {
+    margin-left: 8px;
+    width: 80px;
+}
+
+.accordion-inner {
+    max-height: 400px;
+    overflow-y: scroll;
+}

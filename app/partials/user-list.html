@@ -1,0 +1,31 @@
+<ng-include src="'partials/user-modals.html'"></ng-include>
+
+<div class="container">
+    <div class="accordion" id="users-accordion">
+        <div ng-repeat="user in users" class="accordion-group">
+
+            <!-- Header -->
+            <div class="accordion-heading">
+                <span class="text-center label item-status" ng-class="statusInfo[user.status].labelClass">{{statusInfo[user.status].name}}</span>
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#users-accordion" href="#{{user._id}}">{{user.name}}<span ng-show="!!user.hosts.length"> ({{user.hosts | ifList}})</span></a>
+            </div>
+
+            <!-- Content -->
+            <div id="{{user._id}}" class="accordion-body collapse">
+                <div class="accordion-inner">
+
+                    <ul class="unstyled">
+                        <li><strong>Last login:</strong> {{user.logged | ifDate}}</li>
+                    </ul>
+
+                    <div>
+                        <button open-user-modal="#modal-user-update" class="btn">Edit</button>
+                        <button open-user-modal="#modal-user-remove" class="btn btn-danger">Remove</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

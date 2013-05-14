@@ -1,0 +1,129 @@
+<div ng-controller="SyncModalCtrl">
+
+    <!-- Update sync modal -->
+    <div ng-model="sync" id="modal-sync-update" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Update sync</h3>
+        </div>
+        <form class="form-horizontal" name="updateSyncForm">
+            <div class="modal-body">
+
+                <h4>Source</h4>
+
+                <!-- User -->
+                <div class="control-group">
+                    <label class="control-label" for="input-src-user">User</label>
+                    <div class="controls">
+                        <select ng-model="userSrc" ng-options="u.name for u in users" id="input-src-user" required></select>
+                    </div>
+                </div>
+                <!-- UUID -->
+                <div class="control-group">
+                    <label class="control-label" for="input-src-uuid">Disk UUID</label>
+                    <div class="controls">
+                        <input ng-model="sync.src.uuid" type="text" id="input-src-uuid">
+                    </div>
+                </div>
+                <!-- Path -->
+                <div class="control-group">
+                    <label class="control-label" for="input-src-path">Path</label>
+                    <div class="controls">
+                        <input ng-model="sync.src.path" type="text" id="input-src-path" required>
+                    </div>
+                </div>
+
+                <h4>Destination</h4>
+
+                <!-- User -->
+                <div class="control-group">
+                    <label class="control-label" for="input-dst-user">User</label>
+                    <div class="controls">
+                        <select ng-model="userDst" ng-options="u.name for u in users" id="input-dst-user" required></select>
+                    </div>
+                </div>
+                <!-- UUID -->
+                <div class="control-group">
+                    <label class="control-label" for="input-dst-uuid">Disk UUID</label>
+                    <div class="controls">
+                        <input ng-model="sync.dst.uuid" type="text" id="input-dst-uuid">
+                    </div>
+                </div>
+                <!-- Path -->
+                <div class="control-group">
+                    <label class="control-label" for="input-dst-path">Path</label>
+                    <div class="controls">
+                        <input ng-model="sync.dst.path" type="text" id="input-dst-path" required>
+                    </div>
+                </div>
+
+                <h4>Options</h4>
+
+                <!-- Exclusions -->
+                <div class="control-group">
+                    <label class="control-label">Exclusions</label>
+                    <div class="controls controls-row">
+                        <div ng-repeat="excl in sync.exclusions" class="input-append">
+                            <input ng-model="excl.val" class="span2" type="text">
+                            <a href="" ng-click="sync.exclusions.splice($index, 1)" class="add-on"><i class="icon-remove"></i></a>
+                        </div>
+                        <a class="btn" href="" ng-click="sync.exclusions.push({})"><i class="icon-plus"></i></a>
+                    </div>
+                </div>
+
+                <!-- Delete -->
+                <div class="control-group">
+                    <label class="control-label" for="input-delete">Delete</label>
+                    <div class="controls">
+                        <input ng-model="sync.delete" class="span1" type="checkbox" id="input-delete">
+                    </div>
+                </div>
+
+                <!-- Recurrence -->
+                <div class="control-group">
+                    <label class="control-label" for="input-recurrence">Recurrence</label>
+                    <div class="controls">
+                        <input ng-model="sync.recurrence" class="span1" type="number" min="1" max="9999" id="input-recurrence" required><span class="add-on"> hours</span>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div class="control-group">
+                    <label class="control-label" for="input-hour-begin">Hour begin</label>
+                    <div class="controls">
+                        <input ng-model="sync.hour_begin" class="span1" type="number" min="0" max="23" id="input-hour-begin">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="input-hour-end">Hour end</label>
+                    <div class="controls">
+                        <input ng-model="sync.hour_end" class="span1" type="number" min="1" max="24" id="input-hour-end">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button submit-modal="updateSync()" ng-disabled="updateSyncForm.$invalid" class="btn btn-danger">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Remove sync modal -->
+    <div ng-model="sync" id="modal-sync-remove" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Remove sync</h3>
+        </div>
+        <form class="form-horizontal" name="removeSyncForm">
+            <div class="modal-body">
+                <p>Are you sure you want to remove <strong>{{sync.name}}</strong> ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button submit-modal="removeSync()" ng-disabled="removeSyncForm.$invalid" class="btn btn-danger">Ok</button>
+            </div>
+        </form>
+    </div>
+
+</div>
