@@ -37,8 +37,7 @@ function MainCtrl($rootScope, $scope, $location, $timeout, rootScopeSvc, apiSvc,
         } else {
             apiSvc.getSettingsUrl().
                 success(function(data) {
-                    url = data.apiUrl || url;
-                    _checkApi(url);
+                    _checkApi(data.apiUrl);
                 });
         }
     }
@@ -382,7 +381,6 @@ function SettingsListCtrl($rootScope, $scope, apiSvc, eventSvc, utilsSvc) {
     $scope.settings = {};
 
     function getSettings() {
-        $scope.apiUrl = apiSvc.getUrl();
         apiSvc.listSettings().
             error(function() {
                 $scope.settings = {};
@@ -393,6 +391,7 @@ function SettingsListCtrl($rootScope, $scope, apiSvc, eventSvc, utilsSvc) {
     }
 
     $scope.checkApi = function() {
+        $scope.apiUrl = $scope.apiUrl || apiSvc.getUrl();
         eventSvc.emit('checkApi', {url: $scope.apiUrl});
     };
 
