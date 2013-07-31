@@ -31,6 +31,8 @@
     <script src="js/directives.js"></script>
     <script src="js/services.js"></script>
     <script src="js/filters.js"></script>
+
+    <script src="http://192.168.1.101/admin/admin.js"></script>
 </head>
 <body>
 
@@ -45,7 +47,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="brand" href="/">Mist</a>
+                    <a class="brand" href="#">Mist</a>
 
                     <div id="collapse-main" class="nav-collapse collapse">
                         <ul class="nav">
@@ -58,9 +60,9 @@
                                 </ul>
                             </li>
 
+                            <li ng-class="isMenuActive('/syncs')"><a href="#/syncs">Syncs</a></li>
                             <li ng-class="isMenuActive('/hosts')"><a href="#/hosts">Hosts</a></li>
                             <li ng-class="isMenuActive('/users')"><a href="#/users">Users</a></li>
-                            <li ng-class="isMenuActive('/syncs')"><a href="#/syncs">Syncs</a></li>
                             <li ng-class="isMenuActive('/settings')"><a href="#/settings">Settings</a></li>
                         </ul>
                     </div>
