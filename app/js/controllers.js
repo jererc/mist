@@ -7,7 +7,7 @@
 function MainCtrl($rootScope, $scope, $location, $timeout, rootScopeSvc, apiSvc, eventSvc, utilsSvc) {
 
     $rootScope.apiStatus = false;
-
+    $rootScope.hasResult = true;
     $rootScope.users = [];
 
     var usersDelta = 10000;
@@ -54,6 +54,7 @@ function MainCtrl($rootScope, $scope, $location, $timeout, rootScopeSvc, apiSvc,
                 }).
                 success(function(data) {
                     utilsSvc.updateList($rootScope.users, data.result, '_id');
+                    $rootScope.hasResult = data.result.length > 0 ? true : false;
                     usersTimeout = $timeout(updateUsers, usersDelta);
                 });
         }
@@ -150,8 +151,9 @@ function AddModalCtrl($rootScope, $scope, apiSvc, eventSvc, utilsSvc) {
 //
 function HostListCtrl($rootScope, $scope, $timeout, $location, apiSvc, eventSvc, utilsSvc) {
 
-    $scope.hosts = [];
+    $rootScope.hasResult = true;
 
+    $scope.hosts = [];
     $scope.statusInfo = {
         true: {name: 'up', labelClass: 'label-success'},
         false: {name: 'down', labelClass: 'label-important'},
@@ -176,6 +178,7 @@ function HostListCtrl($rootScope, $scope, $timeout, $location, apiSvc, eventSvc,
                 }).
                 success(function(data) {
                     utilsSvc.updateList($scope.hosts, data.result, '_id');
+                    $rootScope.hasResult = data.result.length > 0 ? true : false;
                     updateTimeout = $timeout(updateHosts, cacheDelta);
                 });
         }
@@ -260,8 +263,9 @@ function UserModalCtrl($rootScope, $scope, apiSvc, eventSvc, utilsSvc) {
 //
 function SyncListCtrl($rootScope, $scope, $timeout, $location, apiSvc, eventSvc, utilsSvc) {
 
-    $scope.syncs = [];
+    $rootScope.hasResult = true;
 
+    $scope.syncs = [];
     $scope.statusInfo = {
         'ok': {labelClass: 'label-success'},
         'queued': {labelClass: ''},
@@ -287,6 +291,7 @@ function SyncListCtrl($rootScope, $scope, $timeout, $location, apiSvc, eventSvc,
                 }).
                 success(function(data) {
                     utilsSvc.updateList($scope.syncs, data.result, '_id');
+                    $rootScope.hasResult = data.result.length > 0 ? true : false;
                     updateTimeout = $timeout(updateSyncs, cacheDelta);
                 });
         }

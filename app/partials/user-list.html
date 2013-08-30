@@ -1,6 +1,9 @@
 <ng-include src="'partials/user-modals.html'"></ng-include>
 
 <div class="container">
+
+    <div ng-show="!hasResult">No result</div>
+
     <div class="accordion" id="users-accordion">
         <div ng-repeat="user in users" class="accordion-group">
 

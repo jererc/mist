@@ -1,4 +1,7 @@
 <div class="container">
+
+    <div ng-show="!hasResult">No result</div>
+
     <div class="accordion" id="hosts-accordion">
         <div ng-repeat="host in hosts" class="accordion-group">
 
@@ -44,7 +47,7 @@
                     </ul>
 
                     <div>
-                        <button ng-click="resetHost(host._id)" ng-class="{disabled: !!!host.logged_users.length}" class="btn btn-warning" type="button">Reset</button>
+                        <button ng-click="resetHost(host._id)" ng-class="{disabled: !!!host.all_users.length}" class="btn btn-warning" type="button">Reset</button>
                     </div>
 
                 </div>
